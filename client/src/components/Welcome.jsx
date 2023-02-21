@@ -1,6 +1,8 @@
+import {useState, useContext} from "react";
 import {AiFillPlayCircle} from "react-icons/ai";
 import {SiEthereum} from "react-icons/si";
 import {BsInfoCircle} from "react-icons/bs";
+import { TransactionContext } from "../context/Transactions";
 
 import {Loader} from "./";
 
@@ -13,14 +15,24 @@ const Input = ({placeholder, name, type, handleChange}) => (
   name={name}
   type={type}
   step="0.0001"
-  onClick={(e)=>{handleChange(e,name)}}
+  onChange={(e)=>{handleChange(e,name)}}
   />
 );
 
 const Welcome = () => {
-  const connectWallet = () => {
+  const {connectWallet, currentAccount, handleChange, formData, transferAmount} = useContext(TransactionContext);
 
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const {addressTo, amount, keyword, message} = formData;
+
+    if(!addressTo || !amount || !keyword || !message) return;
+
+    transferAmount();
+
+  }
+
 
     return(
        <div className="flex w-full justify-center items-center mt-20">
@@ -32,6 +44,7 @@ const Welcome = () => {
              <p className="mt-5 text-center text-gray-300 mf:w-9/12 w-11/12">
               Explore the crypto world. Buy and sell cryptocurrencies easily on Krypto.
              </p>
+             {!currentAccount && (
              <button
               className="bg-[#2952e3] cursor-pointer rounded-full hover:bg-[#2546bd] md:w-full w-72 py-3 my-5"
               onClick={connectWallet}
@@ -40,7 +53,7 @@ const Welcome = () => {
               Connect Wallet
              </p>
              </button>
-
+             )}
              <div className="grid grid-cols-2 md:grid-cols-3 md:w-full w-72 mt-10">
                 <div className={`rounded-tl-2xl ${commonStyles}`}>
                 Reliability
@@ -81,23 +94,23 @@ const Welcome = () => {
 
                <div className="mt-5 flex flex-col justify-between blue-glassmorphism p-5 border sm:w-96 w-80">
                  <Input 
-                  placeholder="Address To" name="addressTo" type="text" handleChange={()=>{}}
+                  placeholder="Address To" name="addressTo" type="text" handleChange={handleChange}
                />
                  <Input 
-                  placeholder="Amount (ETH)" name="amount" type="number" handleChange={()=>{}}
+                  placeholder="Amount (ETH)" name="amount" type="number" handleChange={handleChange}
                />
                  <Input 
-                  placeholder="Keyword (Gif)" name="keyword" type="text" handleChange={()=>{}}
+                  placeholder="Keyword (Gif)" name="keyword" type="text" handleChange={handleChange}
                />
                  <Input 
-                  placeholder="Enter Message" name="message" type="text" handleChange={()=>{}}
+                  placeholder="Enter Message" name="message" type="text" handleChange={handleChange}
                />
 
                <div className='mt-2 border-t border-gray-400' />
                {false ? (
                 <Loader/>
                ): (
-                <button className="rounded-full border-[1px] border-[#3d4f7c] mt-5 text-white p-2">
+                <button onClick={(e)=>handleSubmit(e)} className="rounded-full border-[1px] border-[#3d4f7c] mt-5 text-white p-2">
                   Send Now
                 </button>
                )}

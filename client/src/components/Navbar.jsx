@@ -1,7 +1,6 @@
 import {useState} from 'react'
 import { HiMenuAlt4 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
-
 import logo from "../../images/logo.png"
 
 const NavbarItem = ({title, classProps}) => {
@@ -13,7 +12,7 @@ const NavbarItem = ({title, classProps}) => {
 }
 
 const Navbar = () => {
-    const [toggleMenu, setToggleMenu] = useState(true)
+    const [toggleMenu, setToggleMenu] = useState(false)
 
   return (
      <nav className='flex md:justify-center justify-between items-center px-4'>
