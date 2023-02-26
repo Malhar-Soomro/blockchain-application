@@ -2,7 +2,7 @@ import {useState, useContext} from "react";
 import {AiFillPlayCircle} from "react-icons/ai";
 import {SiEthereum} from "react-icons/si";
 import {BsInfoCircle} from "react-icons/bs";
-import { TransactionContext } from "../context/Transactions";
+import { TransactionContext } from "../context/TransactionsContext";
 
 import {Loader} from "./";
 
