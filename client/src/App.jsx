@@ -1,13 +1,17 @@
 import { useState } from 'react'
-import './App.css'
+import { Navbar, Welcome, Services, Transactions, Footer } from "./components"
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+   <div className='gradient-bg-welcome'>
+      <Navbar/>
+      <Welcome/>
+      <Services/>
+      <Transactions/>
+      <Footer/>
+   </div>
   );
 }
 export default App
