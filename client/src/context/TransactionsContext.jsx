@@ -11,7 +11,7 @@ export const TransactionProvider = ({children}) => {
   const {ethereum} = window;
   
   const [formData, setFormData] = useState({addressTo:"", amount:"", keyword:"", message:""});
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [transactionCount, setTransactionCount] = useState(localStorage.getItem("transactionCount"));
 
   const [transactions, setTransactions] = useState([]);
