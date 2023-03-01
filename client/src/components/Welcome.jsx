@@ -21,7 +21,7 @@ const Input = ({placeholder, name, type, handleChange}) => (
 );
 
 const Welcome = () => {
-  const {connectWallet, currentAccount, handleChange, formData, transferAmount} = useContext(TransactionContext);
+  const {connectWallet, currentAccount, handleChange, formData, transferAmount, isLoading} = useContext(TransactionContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -106,7 +106,7 @@ const Welcome = () => {
                />
 
                <div className='mt-2 border-t border-gray-400' />
-               {false ? (
+               {isLoading ? (
                 <Loader/>
                ): (
                 <button onClick={(e)=>handleSubmit(e)} className="rounded-full border-[1px] border-[#3d4f7c] mt-5 text-white p-2">

@@ -11,7 +11,7 @@ export const TransactionProvider = ({children}) => {
   const {ethereum} = window;
   
   const [formData, setFormData] = useState({addressTo:"", amount:"", keyword:"", message:""});
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [transactionCount, setTransactionCount] = useState(localStorage.getItem("transactionCount"));
 
   const [transactions, setTransactions] = useState([]);
@@ -155,7 +155,7 @@ export const TransactionProvider = ({children}) => {
   
 
   return(
-    <TransactionContext.Provider value={{connectWallet, currentAccount, handleChange, transferAmount, formData, transactions}}>
+    <TransactionContext.Provider value={{connectWallet, currentAccount, handleChange, transferAmount, formData, transactions, isLoading}}>
       {children}
     </TransactionContext.Provider>
   )
