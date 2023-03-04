@@ -9,7 +9,7 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <div className='flex items-start md:justify-evenly justify-between gradient-bg-navbar p-4'>
+    <div className='flex items-center md:justify-evenly justify-between p-4'>
       <div>
         <img src={logo} alt="logo" className='w-32' />
       </div>
