@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { SiEthereum } from "react-icons/si";
 import { BsInfoCircle } from "react-icons/bs";
+import If, {Else} from "if-else-react";
+
+import { TransactionContext } from '../context/TransactionContext';
 
 const Welcome = () => {
+  const  { connectWallet, currentAccount } = useContext(TransactionContext);
+
   return (
     <div className='flex flex-col mf:flex-row justify-center items-center'>
       <div className='flex mf:flex-row flex-col items-center mf:items-start justify-between md:p-20 py-12 px-4'>
@@ -15,10 +20,14 @@ const Welcome = () => {
     
             <p className='text-base text-gray-200 mt-4 mf:w-11/12 w-9/12'>
             Explore the crypto world. Buy and sell cryptocurrencies easily on Krypto.</p>
-    
-            <button className='bg-[#2546bd] flex justify-center items-center w-full rounded-full py-3 px-5 mt-4'>
+  
+            <If condition={!currentAccount}>
+
+            <button onClick={connectWallet} className='bg-[#2546bd] flex justify-center items-center w-full rounded-full py-3 px-5 mt-4'>
               <p className='text-white font-semibold'>Connect Wallet</p>
             </button>
+
+            </If>
   
           <div className='grid grid-cols-2 sm:grid-cols-3 text-white mt-14 w-full'>
             <div className='flex justify-center items-center border-gray-400 border-[1px] rounded-tl-2xl py-6 px-12'>
