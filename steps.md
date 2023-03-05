@@ -56,7 +56,8 @@ export default function App() {
 
 ## delete the contract in the contracts folder and create your own 
 
-## create event, struct and functions
+## type "pragma solidity ^0.8.0"
+## create contract(event, struct and functions)
 
 ## send some test ethereum to your account
 
@@ -69,10 +70,12 @@ export default function App() {
 ## type "npx hardhat run scripts/deploy.js --network goerli"
 
 ## getting error --> Error HH100: Network goerli doesn't exist ? do this : leave
-## there was typo, wrote network instead networks
+## there was typo, wrote network instead of networks
 ### 0xa4482dBc9d5004548d7D6A7e270d5603af8B5f66(practise)
  
 ## copy the address from the command line "0x269225dFD1921Ae8fDDB54e6b0067c38034D2614"(master)
+
+## 0x9d189FC7bB7baa4312899ab8A963fbD937835a95(malhar)
 
 <!-- client -->
 ## create utils folder in the src(client), in utils create constants.js
@@ -135,7 +138,7 @@ console.log(value)
 ## connectWallet(), "eth_requestAccounts"
 ## checkIfWalletConnected(), "eth_accounts"
 
-## formData, handleChange, handleSubmit,
+## formData, handleChange(), handleSubmit(),
 
 ## getEthereumContract(), to access addToBlockchain() and getTransactionCount(), smart contract functions
 ## transferAmount()
