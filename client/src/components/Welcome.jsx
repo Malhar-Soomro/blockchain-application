@@ -1,12 +1,26 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { SiEthereum } from "react-icons/si";
 import { BsInfoCircle } from "react-icons/bs";
 import If, {Else} from "if-else-react";
 
 import { TransactionContext } from '../context/TransactionContext';
 
+const Input = ({name, type, placeholder, onChange}) => (
+    <input 
+    className='bg-transparent text-white white-glassmorphism outline-none border-none rounded-sm p-2 mt-4' name={name}
+    type={type} 
+    placeholder={placeholder} 
+    onChange={(e) => onChange(e, name)}
+    />
+  );
 const Welcome = () => {
-  const  { connectWallet, currentAccount } = useContext(TransactionContext);
+  const  { connectWallet, currentAccount, handleOnChange, formData } = useContext(TransactionContext);  
+  
+  const transferAmount = () => {
+
+  }
+
+ 
 
   return (
     <div className='flex flex-col mf:flex-row justify-center items-center'>
@@ -22,11 +36,9 @@ const Welcome = () => {
             Explore the crypto world. Buy and sell cryptocurrencies easily on Krypto.</p>
   
             <If condition={!currentAccount}>
-
             <button onClick={connectWallet} className='bg-[#2546bd] flex justify-center items-center w-full rounded-full py-3 px-5 mt-4'>
               <p className='text-white font-semibold'>Connect Wallet</p>
             </button>
-
             </If>
   
           <div className='grid grid-cols-2 sm:grid-cols-3 text-white mt-14 w-full'>
@@ -49,8 +61,6 @@ const Welcome = () => {
               <p className='text-white text-sm'>Blockchain</p>
             </div>
           </div>
-  
-  
         </div>
   
   
@@ -71,13 +81,13 @@ const Welcome = () => {
           </div>
   
           <div className='flex flex-col blue-glassmorphism p-5 w-full sm:w-96 mt-5'> 
-            <input className='bg-transparent text-white white-glassmorphism outline-none border-none rounded-sm p-2 mt-2' type="text" placeholder='Address To' />
-            <input className='bg-transparent text-white white-glassmorphism outline-none border-none rounded-sm p-2 mt-4' type="text" placeholder='Amount(ETH)' />
-            <input className='bg-transparent text-white white-glassmorphism outline-none border-none rounded-sm p-2 mt-4' type="text" placeholder='Keyword(Gif)' />
-            <input className='bg-transparent text-white white-glassmorphism outline-none border-none rounded-sm p-2 mt-4' type="text" placeholder='Enter Message' />
+            <Input name="addressTo" type="text" placeholder="Address To" onChange={handleOnChange}/>
+            <Input name="amount" type="Number" placeholder="Amount (ETH)" onChange={handleOnChange}/>
+            <Input name="keyword" type="text" placeholder="Keyword (Gif)" onChange={handleOnChange}/>
+            <Input name="message" type="text" placeholder="Enter Message" onChange={handleOnChange}/>
   
             <div className='bg-gray-500 h-[1px] mt-4'/>
-            <button className='w-full rounded-full mt-4 border-[#3d4f7c] border-[1.5px] p-2'>
+            <button onClick={transferAmount} className='w-full rounded-full mt-4 border-[#3d4f7c] border-[1.5px] p-2'>
               <p className='text-white'>Send Now</p>
             </button>
           </div>

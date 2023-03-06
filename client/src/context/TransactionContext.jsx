@@ -6,7 +6,15 @@ export const TransactionProvider = ({children}) => {
 
     const [currentAccount, setCurrentAccount] = React.useState();
 
+    const [formData, setFormData] = React.useState({addressTo:"",amount:"",keyword:"",message:""});
+
     const {ethereum} = window;
+
+    const handleOnChange = (e, name) => {
+    e.preventDefault();
+    setFormData({...formData, [name]:e.target.value})
+  }
+
 
     const connectWallet = async () => {
         if(!ethereum) return alert("Plz install metamask");
@@ -43,7 +51,7 @@ export const TransactionProvider = ({children}) => {
     },[])
 
     return(
-    <TransactionContext.Provider value={{connectWallet, currentAccount}}>
+    <TransactionContext.Provider value={{connectWallet, currentAccount, handleOnChange, formData}}>
       {children}
     </TransactionContext.Provider>
     );
