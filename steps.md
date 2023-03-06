@@ -141,12 +141,15 @@ console.log(value)
 ## formData, handleChange(), handleSubmit(),
 
 ## getEthereumContract(), to access addToBlockchain() and getTransactionCount(), smart contract functions
+<!-- I found no use of transactionCount in practice and right now I am in malhar, let's see for what use it is, but after the completion of project(malhar)   -->
 ## transferAmount()
 
 ## getting error --> Cannot read properties of undefined (reading 'Web3Provider').
 ## First of all uninstall the latest ethers package
 ## type "npm uninstall ethers"
 ## and then install this version "npm install ethers@5.5.1" 
+
+## got an Error something like bigNumber while calling addToBlockchain function ? make sure to pass parsedAmount as an argument instead of amount : leave
 
 ## services section
 

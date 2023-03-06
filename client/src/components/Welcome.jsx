@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { SiEthereum } from "react-icons/si";
 import { BsInfoCircle } from "react-icons/bs";
-import If, {Else} from "if-else-react";
+import If from "if-else-react";
 
 import { TransactionContext } from '../context/TransactionContext';
 
@@ -9,15 +9,20 @@ const Input = ({name, type, placeholder, onChange}) => (
     <input 
     className='bg-transparent text-white white-glassmorphism outline-none border-none rounded-sm p-2 mt-4' name={name}
     type={type} 
+    step="0.00001"
     placeholder={placeholder} 
     onChange={(e) => onChange(e, name)}
     />
   );
 const Welcome = () => {
-  const  { connectWallet, currentAccount, handleOnChange, formData } = useContext(TransactionContext);  
-  
-  const transferAmount = () => {
+  const  { connectWallet, currentAccount, handleOnChange, formData, transferAmount } = useContext(TransactionContext);  
 
+  const handleSubmit = () =>  {
+    // if none of input is null, call transfer amount function
+    const { addressTo, amount, keyword, message } = formData; 
+    if(addressTo && amount  && keyword && message){
+      transferAmount();
+    }
   }
 
  
@@ -87,7 +92,7 @@ const Welcome = () => {
             <Input name="message" type="text" placeholder="Enter Message" onChange={handleOnChange}/>
   
             <div className='bg-gray-500 h-[1px] mt-4'/>
-            <button onClick={transferAmount} className='w-full rounded-full mt-4 border-[#3d4f7c] border-[1.5px] p-2'>
+            <button onClick={handleSubmit} className='w-full rounded-full mt-4 border-[#3d4f7c] border-[1.5px] p-2'>
               <p className='text-white'>Send Now</p>
             </button>
           </div>
