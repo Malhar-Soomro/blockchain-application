@@ -4,6 +4,7 @@ import { BsInfoCircle } from "react-icons/bs";
 import If from "if-else-react";
 
 import { TransactionContext } from '../context/TransactionContext';
+import { shortenAddress } from '../utils/shortenAddress';
 
 const Input = ({name, type, placeholder, onChange}) => (
     <input 
@@ -79,7 +80,7 @@ const Welcome = () => {
             </div>
             
             <div>
-              <p className='text-white text-md font-semibold'>Address</p>
+              <p className='text-white text-md font-semibold'>{shortenAddress(currentAccount)}</p>
               <p className='text-white text-md font-semibold'>Ethereum</p>
             </div>
   
