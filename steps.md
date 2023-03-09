@@ -153,11 +153,12 @@ console.log(value)
 
 ## services section
 
+## We missed to add address on the card in welcome section
+## address is too long, so that's why we are creating a new function in utils(shortenAddress)
+
 ## transactions section
 ## created dummyData.js in utils and added some data
 ## get currentAccount from context and display two h3
-## We missed to add address on the card in welcome section
-## address is too long, so that's why we are creating a new function in utils(shortenAddress)
 ## render dummy transactions on <TransactionCard/>, parent div bg-[#181918], 2:35:00
 ## to fetch gifs use developers.giphy.com, create account and copy api key
 ## create .env, VITE_GIPHY_API
