@@ -1,14 +1,15 @@
 import React, { useContext, useState } from 'react'
 import { SiEthereum } from "react-icons/si";
 import { BsInfoCircle } from "react-icons/bs";
-import If from "if-else-react";
+import If, {Else} from "if-else-react";
 
 import { TransactionContext } from '../context/TransactionContext';
 import { shortenAddress } from '../utils/shortenAddress';
+import Loader from './Loader';
 
 const Input = ({name, type, placeholder, onChange}) => (
     <input 
-    className='bg-transparent text-white white-glassmorphism outline-none border-none rounded-sm p-2 mt-4' name={name}
+    className='bg-transparent text-white white-glassmorphism outline-none border-none rounded-sm p-2 mt-4 shadow-2xl' name={name}
     type={type} 
     step="0.00001"
     placeholder={placeholder} 
@@ -16,7 +17,7 @@ const Input = ({name, type, placeholder, onChange}) => (
     />
   );
 const Welcome = () => {
-  const  { connectWallet, currentAccount, handleOnChange, formData, transferAmount } = useContext(TransactionContext);  
+  const  { connectWallet, currentAccount, handleOnChange, formData, transferAmount, isLoading } = useContext(TransactionContext);  
 
   const handleSubmit = () =>  {
     // if none of input is null, call transfer amount function
@@ -80,7 +81,7 @@ const Welcome = () => {
             </div>
             
             <div>
-              <p className='text-white text-md font-semibold'>{shortenAddress(currentAccount)}</p>
+              <p className='text-white text-md font-semibold'>{currentAccount ? shortenAddress(currentAccount) : "Address"}</p>
               <p className='text-white text-md font-semibold'>Ethereum</p>
             </div>
   
@@ -93,9 +94,13 @@ const Welcome = () => {
             <Input name="message" type="text" placeholder="Enter Message" onChange={handleOnChange}/>
   
             <div className='bg-gray-500 h-[1px] mt-4'/>
-            <button onClick={handleSubmit} className='w-full rounded-full mt-4 border-[#3d4f7c] border-[1.5px] p-2'>
-              <p className='text-white'>Send Now</p>
-            </button>
+            <If condition={isLoading}>
+              <Loader/>
+              <Else/>
+              <button onClick={handleSubmit} className='w-full rounded-full mt-4 border-[#3d4f7c] border-[1.5px] p-2'>
+                <p className='text-white'>Send Now</p>
+              </button>
+            </If>
           </div>
         </div>
       </div>
