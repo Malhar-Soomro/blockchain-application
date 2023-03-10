@@ -15,6 +15,8 @@ export const TransactionProvider = ({children}) => {
 
     const [isLoading, setIsLoading] = React.useState(false);
 
+    const [transactions, setTransactions] = React.useState([]);
+
     const {ethereum} = window;
 
     const handleOnChange = (e, name) => {
@@ -22,7 +24,6 @@ export const TransactionProvider = ({children}) => {
     setFormData({...formData, [name]:e.target.value})
   }
 
-      
     const getEthereumContract = () => {
         const provider = new ethers.providers.Web3Provider(ethereum);
         
@@ -34,10 +35,8 @@ export const TransactionProvider = ({children}) => {
             signer
         );
     
-        console.log(transactionContract)
         return transactionContract;
     }
-
 
 
     const connectWallet = async () => {
@@ -55,6 +54,33 @@ export const TransactionProvider = ({children}) => {
         }
     }
 
+    const getAllTransactions = async () => {
+        try {
+            if(!ethereum) return alert("Plz install metamask");
+
+            const transactionContract = getEthereumContract();
+
+            const allTransactions = await transactionContract.getAllTransactions();
+
+            const structuredTransactions = allTransactions.map((transaction) => ({
+                addressFrom: transaction.receiver,
+                addressTo: transaction.sender,
+                amount: parseInt(transaction.amount._hex) / (10 ** 18),
+                keyword: transaction.keyword,
+                message: transaction.message,
+                timestamp: new Date(transaction.timestamp.toNumber() * 1000).toLocaleString()
+            }));
+
+            setTransactions(structuredTransactions);
+            
+            return structuredTransactions;
+            
+        } catch (error) {
+            console.log(error)
+            throw new Error(error);   
+        }
+    }
+
     const checkIfWalletConnected = async () => {
         if(!ethereum) return alert("Plz install metamask");
         try {
@@ -63,6 +89,7 @@ export const TransactionProvider = ({children}) => {
             });
             if(accounts.length){
                 setCurrentAccount(accounts[0])
+                getAllTransactions()
                 console.log(accounts[0]);
             }
             else console.log("no account found")
@@ -105,8 +132,7 @@ export const TransactionProvider = ({children}) => {
 
             setTransactionCount(transactionCount.toNumber());
 
-
-            
+            Window.reload();
             
         } catch (error) {
             console.log(error)
@@ -114,12 +140,15 @@ export const TransactionProvider = ({children}) => {
         }
     }
 
+  
+
+
     React.useEffect(() => {
         checkIfWalletConnected();
     },[])
 
     return(
-    <TransactionContext.Provider value={{connectWallet, currentAccount, handleOnChange, formData, transferAmount, isLoading}}>
+    <TransactionContext.Provider value={{connectWallet, currentAccount, handleOnChange, formData, transferAmount, isLoading, transactions}}>
       {children}
     </TransactionContext.Provider>
     );

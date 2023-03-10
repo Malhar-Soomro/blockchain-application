@@ -39,13 +39,18 @@ const Welcome = () => {
               across the world
             </h1>
     
-            <p className='text-base text-gray-200 mt-4 mf:w-11/12 w-9/12'>
+            <p className='text-base text-gray-200 mt-4 w-11/12 md:w-9/12'>
             Explore the crypto world. Buy and sell cryptocurrencies easily on Krypto.</p>
   
             <If condition={!currentAccount}>
-            <button onClick={connectWallet} className='bg-[#2546bd] flex justify-center items-center w-full rounded-full py-3 px-5 mt-4'>
-              <p className='text-white font-semibold'>Connect Wallet</p>
-            </button>
+              <button onClick={connectWallet} className='bg-[#2546bd] flex justify-center items-center w-full rounded-full py-3 px-5 mt-4'>
+                <p className='text-white font-semibold'>Connect Wallet</p>
+              </button>
+            <Else/>
+            <div className='w-full flex justify-center mt-7'>
+              <p className='text-green-500 font-semibold'>Metamask connected</p>  
+            </div>
+              
             </If>
   
           <div className='grid grid-cols-2 sm:grid-cols-3 text-white mt-14 w-full'>

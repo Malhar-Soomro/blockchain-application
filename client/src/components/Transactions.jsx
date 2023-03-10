@@ -1,11 +1,13 @@
 import React from 'react';
 import If, {Else} from "if-else-react";
 
-import {TransactionContext} from "../context/TransactionContext"; 
+import { TransactionContext } from "../context/TransactionContext"; 
 import dummyData from "../utils/dummyData";
 import {shortenAddress} from "../utils/shortenAddress";
+import { useFetch } from '../hooks/useFetch';
 
-const TransactionCard = ({addressFrom, addressTo, message, amount, url, timestamp}) => {
+const TransactionCard = ({addressFrom, addressTo, message, amount, url, timestamp, keyword}) => {
+ const gifUrl =  useFetch({keyword});
   return(
     <div className='flex flex-col bg-[#181918] p-5 
     2xl:min-w-[450px]
@@ -19,21 +21,20 @@ const TransactionCard = ({addressFrom, addressTo, message, amount, url, timestam
         <p className='text-white text-lg'>Amount:{amount}</p>
       </div>
       
-        <img className='object-cover h-64 2xl:h-96 w-full mt-4' src={url} alt="" />
+        <img className='object-cover h-64 2xl:h-96 w-full mt-4' src={gifUrl || url} alt="" />
 
         <div className='flex w-full justify-center -mt-5'>
-        <div className='bg-black rounded-full justify-center w-64 flex p-2 text-center'>
-        <p className='text-lg text-[#37c7da] font-bold'>{timestamp}</p>
-        </div>
-
+          <div className='bg-black rounded-full justify-center w-64 flex p-2 text-center'>
+          <p className='text-lg text-[#37c7da] font-bold'>{timestamp}</p>
+          </div>
         </div>
     </div>
   );
 }
 
 const Transactions = () => {
+  const {currentAccount, transactions} = React.useContext(TransactionContext);
 
-  const {currentAccount} = React.useContext(TransactionContext);
   return (
     <div className='flex flex-col justify-center items-center w-full gradient-bg-transactions p-10'> 
 
@@ -46,7 +47,7 @@ const Transactions = () => {
       </div>
 
       <div className='flex flex-wrap p-10 mt-5 w-full gap-10 justify-center'>
-      {dummyData.reverse().map((transactions) => (
+      {transactions.reverse().map((transactions) => (
         <TransactionCard {...transactions}/>
       ))}
       </div>

@@ -5,12 +5,15 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-   <div className='gradient-bg-welcome'>
+
+   <div className='min-h-screen'>
+     <div className='gradient-bg-welcome'>
       <Navbar/>
       <Welcome/>
-      <Services/>
-      <Transactions/>
-      <Footer/>
+     </div>
+     <Services/>
+     <Transactions/>
+     <Footer/>
    </div>
   );
 }
