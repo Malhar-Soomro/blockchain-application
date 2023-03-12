@@ -4,9 +4,11 @@ import logo from "../assets/logo.png";
 const Footer = () => {
   return (
     <div className='flex flex-col gradient-bg-footer p-10'>
-      <div className='flex justify-evenly  items-center'>
-        <img className='w-32' src={logo} alt="" />
-        <div className='flex justify-between w-full flex-[0.5]'>
+      <div className='flex justify-evenly sm:flex-row flex-col items-center'>
+        <div className='flex-[0.2] flex mb-5 sm:mb-0'>
+          <img className='w-32' src={logo} alt="" />
+        </div>
+        <div className='flex justify-between w-full flex-[0.5] flex-wrap'>
           {["Market", "Exchange", "Tutorial", "Wallets"].map((item,index) => (
             <li className='text-white list-none' key={index}>{item}</li>
           ))}
