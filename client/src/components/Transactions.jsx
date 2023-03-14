@@ -16,10 +16,27 @@ const TransactionCard = ({addressFrom, addressTo, message, amount, url, timestam
     sm:max-w-[300px]
     '>
       <div className='flex flex-col mt-4'>
-        <p className='text-white text-lg'>From: {shortenAddress(addressFrom)}</p>
-        <p className='text-white text-lg'>To: {shortenAddress(addressTo)}</p>
-        <p className='text-white text-lg'>Amount:{amount}</p>
+        <a 
+        className='text-white text-lg cursor-pointer' 
+        href={`https://goerli.etherscan.io/address/${addressFrom}`} 
+        target="_blank" 
+        rel="noopener noreferrer">
+        From: {shortenAddress(addressFrom)}
+        </a>
+        <a 
+        className='text-white text-lg cursor-pointer' 
+        href={`https://goerli.etherscan.io/address/${addressTo}`} 
+        target="_blank" 
+        rel="noopener noreferrer">
+        To: {shortenAddress(addressTo)}
+        </a>
+        <p className='text-white text-lg'>Amount: {amount}</p>
       </div>
+
+      <If condition={message}>
+        <p className='text-white text-lg'>Message: {message}</p>
+
+      </If>
       
         <img className='object-cover h-64 2xl:h-96 w-full mt-4' src={gifUrl || url} alt="" />
 
